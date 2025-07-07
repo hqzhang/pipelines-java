@@ -16,21 +16,20 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
-  # Agent VM image name
-
+ # Agent VM image name
 pool:
   'azureagent'
 
 stages:
 - stage: Build
-  displayName: Build and push stage
+  displayName: Build stage
   jobs:
   - job: Build
     displayName: Build
     
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build an image 
       inputs:
         command: build
         repository: $(imageRepository)
@@ -39,10 +38,10 @@ stages:
         tags: |
           $(tag)
 - stage: Push
-  displayName: Build and push stage
+  displayName: Push stage
   jobs:
   - job: Push
-    displayName: Build
+    displayName: Push
     
     steps:
     - task: Docker@2
