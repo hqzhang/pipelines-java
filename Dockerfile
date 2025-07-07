@@ -15,16 +15,16 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # ----- Stage 2: Run the app using a lightweight image -----
-FROM eclipse-temurin:17-jre
+#FROM eclipse-temurin:17-jre
 
 # Set working directory
-WORKDIR /app
+#WORKDIR /app
 
 # Copy the JAR from the builder stage
-COPY --from=builder /app/target/*.jar app.jar
+#COPY --from=builder /app/target/*.jar app.jar
 
 # Expose port (change if needed)
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/target/*.jar"]
