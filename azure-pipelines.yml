@@ -53,3 +53,14 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+- stage: Update
+  displayName: Update stage
+  jobs:
+  - job: Update
+    displayName: Update
+    steps: 
+    - task: ShellScript@2
+      inputs:
+        scriptPath:
+        args: 'vote $imageRepository $tag'
+      
